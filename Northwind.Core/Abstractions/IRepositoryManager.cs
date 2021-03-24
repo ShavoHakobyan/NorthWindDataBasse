@@ -14,7 +14,7 @@ namespace Northwind.Core.Abstractions
         public ICustomerRepository Customers { get; }
         public IProductRespository Product { get; }
         public IEmployeeRepository Employee { get; }
-        public IUserRepository Usser { get; }
+        public IUserRepository Users { get; }
         public IOrderDetalsRepository OrderDetail { get; }
 
         public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);

@@ -35,7 +35,7 @@ namespace Northwind.DAL
         public IEmployeeRepository Employee => _employeel ?? (_employeel = new EmployeeRepository(_dbContext));
         public ICustomerRepository Customers => _customer ?? (_customer = new CustomerRepository(_dbContext));
         public IOrderDetalsRepository OrderDetail => _orderDetail ?? (_orderDetail = new OrderDetailRepository(_dbContext));
-        public IUserRepository Usser => _users ?? (_users = new UserRepository(_dbContext));
+        public IUserRepository Users => _users ?? (_users = new UserRepository(_dbContext));
 
         public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {

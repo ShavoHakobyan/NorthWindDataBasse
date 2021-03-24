@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Northwind.Core.Abstractions.Operations
 {
-   public interface IUserOperations
+    public interface IUserOperations
     {
         Task Logout(HttpContext context);
         Task Register(RegisterModel model, HttpContext context);

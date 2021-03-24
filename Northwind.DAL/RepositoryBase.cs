@@ -62,7 +62,7 @@ namespace Northwind.DAL
 
         public T GetSingle(Func<T, bool> predicate)
         {
-            throw new NotImplementedException();
+            return Context.Set<T>().FirstOrDefault(predicate);
         }
     }
 }
