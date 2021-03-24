@@ -27,7 +27,7 @@ namespace Northwind.BLL.Operations
 
         public async Task Login(LoginModel model, HttpContext context)
         {
-            Usser user = _repositories.User.GetSingle(u => u.Email == model.Email && u.Password == model.Password)
+            Usser user = _repositories.Usser.GetSingle(u => u.Email == model.Email && u.Password == model.Password)
                 ?? throw new LogicExecption("Wrong username or password");
 
             await Authenticate(user, context);
@@ -40,7 +40,7 @@ namespace Northwind.BLL.Operations
 
         public async Task Register(RegisterModel model, HttpContext context)
         {
-            Usser user = _repositories.User.GetSingle(u => u.Email == model.Email);
+            Usser user = _repositories.Usser.GetSingle(u => u.Email == model.Email);
             if (user == null)
             {
                 user = new Usser
@@ -49,7 +49,7 @@ namespace Northwind.BLL.Operations
                     Password = model.Password,
                     Role = Role.User
                 };
-                _repositories.User.Add(user);
+                _repositories.Usser.Add(user);
                 await _repositories.SaveChangesAsync();
 
                 await Authenticate(user, context);

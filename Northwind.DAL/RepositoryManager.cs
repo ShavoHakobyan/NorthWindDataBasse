@@ -21,9 +21,7 @@ namespace Northwind.DAL
             //    _serviceProvider = serviceProvider;
         }
 
-        public RepositoryManager()
-        {
-        }
+       
 
         private IOrderRepository _orders;
         private ICustomerRepository _customer;
@@ -33,21 +31,11 @@ namespace Northwind.DAL
         private IUserRepository _users;
 
         public IOrderRepository Orders => _orders ?? (_orders = new OrderRepository(_dbContext));
-
-        //public ICustomerRepository Customers => throw new NotImplementedException();
-
         public IProductRespository Product => _product ?? (_product = new ProductRepository(_dbContext));
-
         public IEmployeeRepository Employee => _employeel ?? (_employeel = new EmployeeRepository(_dbContext));
         public ICustomerRepository Customers => _customer ?? (_customer = new CustomerRepository(_dbContext));
-
-        // public IOrderRepository Orders => _orders ?? (_orders = (IOrderRepository)_serviceProvider.GetService(typeof(IOrderRepository)));
-       
-        public IUserRepository Usser => _users ?? (_users = new UserRepository(_dbContext));
-
         public IOrderDetalsRepository OrderDetail => _orderDetail ?? (_orderDetail = new OrderDetailRepository(_dbContext));
-
-        public IUserRepository User => throw new NotImplementedException();
+        public IUserRepository Usser => _users ?? (_users = new UserRepository(_dbContext));
 
         public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
