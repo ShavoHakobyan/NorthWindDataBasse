@@ -28,16 +28,7 @@ namespace Northwind.Controllers
             var result = _orderOperations.GetOrders();
             return Ok(result);
         }
-        [HttpPost]
-        public IActionResult Post()
-        {
-            return Ok();
-        }
-        [HttpPut]
-        public IActionResult Put()
-        {
-            return Ok();
-        }
+      
 
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
@@ -46,12 +37,12 @@ namespace Northwind.Controllers
             var result = _orderOperations.GetOrder(id);
             return Ok(result);
         }
-        //[HttpGet("inventory")]
-        //public IActionResult GetInventoryList()
-        //{
-        //    var result = _orderOperations.GetInventoryList();
-        //    return Ok(result);
-        //}
+        [HttpGet("inventory")]
+        public IActionResult GetInventoryList()
+        {
+            var result = _orderOperations.GetInventoryList();
+            return Ok(result);
+        }
 
 
 
