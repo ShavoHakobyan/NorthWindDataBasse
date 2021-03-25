@@ -10,9 +10,7 @@ namespace Northwind.DAL
 {
     public partial class NorthwindContext : DbContext
     {
-        public NorthwindContext()
-        {
-        }
+       
 
         public NorthwindContext(DbContextOptions<NorthwindContext> options)
             : base(options)
@@ -50,19 +48,12 @@ namespace Northwind.DAL
         public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<Usser> Ussers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-VQ8RN1S\\SQLEXPRESS;Database=Northwind;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
 
+            #region..AlphabeticalListOfProduct
             modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
             {
                 entity.HasNoKey();
@@ -87,7 +78,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
-
+            #endregion
+            #region..Category
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasIndex(e => e.CategoryName, "CategoryName");
@@ -102,7 +94,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Picture).HasColumnType("image");
             });
-
+            #endregion
+            #region..CategorySalesFor1997
             modelBuilder.Entity<CategorySalesFor1997>(entity =>
             {
                 entity.HasNoKey();
@@ -115,7 +108,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.CategorySales).HasColumnType("money");
             });
-
+            #endregion
+            #region..CurrentProductList
             modelBuilder.Entity<CurrentProductList>(entity =>
             {
                 entity.HasNoKey();
@@ -130,7 +124,8 @@ namespace Northwind.DAL
                     .IsRequired()
                     .HasMaxLength(40);
             });
-
+            #endregion
+            #region..Customer
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasIndex(e => e.City, "City");
@@ -168,7 +163,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Region).HasMaxLength(15);
             });
-
+            #endregion
+            #region..CustomerAndSuppliersByCity
             modelBuilder.Entity<CustomerAndSuppliersByCity>(entity =>
             {
                 entity.HasNoKey();
@@ -188,7 +184,8 @@ namespace Northwind.DAL
                     .HasMaxLength(9)
                     .IsUnicode(false);
             });
-
+            #endregion
+            #region..CustomerCustomerDemo
             modelBuilder.Entity<CustomerCustomerDemo>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.CustomerTypeId })
@@ -218,7 +215,8 @@ namespace Northwind.DAL
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CustomerCustomerDemo");
             });
-
+            #endregion
+            #region..CustomerDemographic
             modelBuilder.Entity<CustomerDemographic>(entity =>
             {
                 entity.HasKey(e => e.CustomerTypeId)
@@ -231,7 +229,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.CustomerDesc).HasColumnType("ntext");
             });
-
+            #endregion
+            #region..Employee
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasIndex(e => e.LastName, "LastName");
@@ -281,7 +280,8 @@ namespace Northwind.DAL
                     .HasForeignKey(d => d.ReportsTo)
                     .HasConstraintName("FK_Employees_Employees");
             });
-
+            #endregion
+            #region..EmployeeTerritory
             modelBuilder.Entity<EmployeeTerritory>(entity =>
             {
                 entity.HasKey(e => new { e.EmployeeId, e.TerritoryId })
@@ -305,7 +305,8 @@ namespace Northwind.DAL
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EmployeeTerritories_Territories");
             });
-
+            #endregion
+            #region..Invoice
             modelBuilder.Entity<Invoice>(entity =>
             {
                 entity.HasNoKey();
@@ -371,7 +372,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
-
+            #endregion
+            #region..Order
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.HasIndex(e => e.CustomerId, "CustomerID");
@@ -436,7 +438,8 @@ namespace Northwind.DAL
                     .HasForeignKey(d => d.ShipVia)
                     .HasConstraintName("FK_Orders_Shippers");
             });
-
+            #endregion
+            #region..OrderDetail
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.ProductId })
@@ -472,7 +475,8 @@ namespace Northwind.DAL
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Details_Products");
             });
-
+            #endregion
+            #region..OrderDetailsExtended
             modelBuilder.Entity<OrderDetailsExtended>(entity =>
             {
                 entity.HasNoKey();
@@ -491,7 +495,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
-
+            #endregion
+            #region..OrderSubtotal
             modelBuilder.Entity<OrderSubtotal>(entity =>
             {
                 entity.HasNoKey();
@@ -502,7 +507,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Subtotal).HasColumnType("money");
             });
-
+            #endregion
+            #region..OrdersQry
             modelBuilder.Entity<OrdersQry>(entity =>
             {
                 entity.HasNoKey();
@@ -552,7 +558,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
-
+            #endregion
+            #region..Product
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasIndex(e => e.CategoryId, "CategoriesProducts");
@@ -597,7 +604,8 @@ namespace Northwind.DAL
                     .HasForeignKey(d => d.SupplierId)
                     .HasConstraintName("FK_Products_Suppliers");
             });
-
+            #endregion
+            #region..ProductSalesFor1997
             modelBuilder.Entity<ProductSalesFor1997>(entity =>
             {
                 entity.HasNoKey();
@@ -614,7 +622,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.ProductSales).HasColumnType("money");
             });
-
+            #endregion
+            #region..ProductsAboveAveragePrice
             modelBuilder.Entity<ProductsAboveAveragePrice>(entity =>
             {
                 entity.HasNoKey();
@@ -627,7 +636,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
             });
-
+            #endregion
+            #region..ProductsByCategory
             modelBuilder.Entity<ProductsByCategory>(entity =>
             {
                 entity.HasNoKey();
@@ -644,7 +654,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.QuantityPerUnit).HasMaxLength(20);
             });
-
+            #endregion
+            #region..QuarterlyOrder
             modelBuilder.Entity<QuarterlyOrder>(entity =>
             {
                 entity.HasNoKey();
@@ -662,7 +673,8 @@ namespace Northwind.DAL
                     .HasColumnName("CustomerID")
                     .IsFixedLength(true);
             });
-
+            #endregion
+            #region..Region
             modelBuilder.Entity<Region>(entity =>
             {
                 entity.HasKey(e => e.RegionId)
@@ -679,7 +691,8 @@ namespace Northwind.DAL
                     .HasMaxLength(50)
                     .IsFixedLength(true);
             });
-
+            #endregion
+            #region..SalesByCategory
             modelBuilder.Entity<SalesByCategory>(entity =>
             {
                 entity.HasNoKey();
@@ -698,7 +711,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.ProductSales).HasColumnType("money");
             });
-
+            #endregion
+            #region..SalesTotalsByAmount
             modelBuilder.Entity<SalesTotalsByAmount>(entity =>
             {
                 entity.HasNoKey();
@@ -715,7 +729,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
-
+            #endregion
+            #region..Shipper
             modelBuilder.Entity<Shipper>(entity =>
             {
                 entity.Property(e => e.ShipperId).HasColumnName("ShipperID");
@@ -726,7 +741,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Phone).HasMaxLength(24);
             });
-
+            #endregion
+            #region..SummaryOfSalesByQuarter
             modelBuilder.Entity<SummaryOfSalesByQuarter>(entity =>
             {
                 entity.HasNoKey();
@@ -739,7 +755,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Subtotal).HasColumnType("money");
             });
-
+            #endregion
+            #region..SummaryOfSalesByYear
             modelBuilder.Entity<SummaryOfSalesByYear>(entity =>
             {
                 entity.HasNoKey();
@@ -752,7 +769,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Subtotal).HasColumnType("money");
             });
-
+            #endregion
+            #region..Supplier
             modelBuilder.Entity<Supplier>(entity =>
             {
                 entity.HasIndex(e => e.CompanyName, "CompanyName");
@@ -785,7 +803,8 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Region).HasMaxLength(15);
             });
-
+            #endregion
+            #region..Territory
             modelBuilder.Entity<Territory>(entity =>
             {
                 entity.HasKey(e => e.TerritoryId)
@@ -808,7 +827,8 @@ namespace Northwind.DAL
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Territories_Region");
             });
-
+            #endregion
+            #region..Usser
             modelBuilder.Entity<Usser>(entity =>
             {
                 entity.ToTable("Usser");
@@ -819,10 +839,10 @@ namespace Northwind.DAL
 
                 entity.Property(e => e.Role).HasMaxLength(50);
             });
-
+            #endregion
             OnModelCreatingPartial(modelBuilder);
         }
-
+       
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

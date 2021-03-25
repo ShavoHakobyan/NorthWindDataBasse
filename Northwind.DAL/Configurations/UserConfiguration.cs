@@ -15,6 +15,7 @@ namespace NLayerArchitecure.DAL.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Email).HasColumnType("VARCHAR(100)");
             builder.Property(x => x.Password).HasColumnType("VARCHAR(100)");
+           
         }
     }
 }
