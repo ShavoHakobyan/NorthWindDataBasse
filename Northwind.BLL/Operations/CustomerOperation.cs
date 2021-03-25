@@ -35,5 +35,10 @@ namespace Northwind.BLL.Operations
             });
             return result;
         }
+
+        public IEnumerable<Customer31> GetCustomer31()
+        {
+            return _customerRepository.Customers.GetCustomer31();
+        }
     }
 }

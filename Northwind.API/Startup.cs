@@ -40,7 +40,7 @@ namespace Northwind.API
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
              .AddCookie(options => //CookieAuthenticationOptions
              {
-                 //   options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+             //    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
              });
             services.AddSwaggerGen(c =>
             {

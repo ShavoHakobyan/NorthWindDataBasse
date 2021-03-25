@@ -8,5 +8,6 @@ namespace Northwind.Core.Abstractions.Operations
     public interface ICustomerOperation
     {
         IEnumerable<CustomerViewModel> GetCustomer();
+        IEnumerable<Customer31> GetCustomer31();
     }
 }

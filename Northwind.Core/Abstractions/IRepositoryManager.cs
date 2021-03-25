@@ -20,6 +20,6 @@ namespace Northwind.Core.Abstractions
         public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
         void SaveChanges();
         Task SaveChangesAsync();
-
+       
     }
 }
