@@ -27,7 +27,8 @@ namespace Northwind.BLL.Operations
 
         public async Task Login(LoginModel model, HttpContext context)
         {
-            Usser user = _repositories.Users.GetSingle(u => u.Email == model.Email && u.Password == model.Password)
+            Usser user = _repositories.Users.GetSingle(u => u.Email == model.Email 
+            && u.Password == model.Password)
                 ?? throw new LogicExecption("Wrong username or password");
 
             await Authenticate(user, context);
