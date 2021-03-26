@@ -12,23 +12,23 @@ namespace Northwind.DAL.Repositories
         public CustomerRepository(NorthwindContext dbContext) : base(dbContext)
         {
         }
-        
+       
         public IEnumerable<CustomerViewModel> GetModel24()
         {
             var Query = from c in Context.Customers
-
+                        where c.Region !=null
                      orderby c.Region, c.CustomerId
-                     
+                    
                         select new CustomerViewModel
                         {
                             CustomerId = c.CustomerId,
                             CompanyName = c.CompanyName,
                             Region = c.Region
-
                         };
             return Query.ToList();
         }
 
+      
 
     }
 }

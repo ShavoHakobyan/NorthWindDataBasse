@@ -44,6 +44,9 @@ namespace Northwind.DAL
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarters { get; set; }
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYears { get; set; }
+
+       
+
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<Usser> Ussers { get; set; }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Repositories;
+using Northwind.Core.Entities;
 
 namespace Northwind.Core.Abstractions
 {
@@ -21,5 +22,10 @@ namespace Northwind.Core.Abstractions
         void SaveChanges();
         Task SaveChangesAsync();
        
+       
+        void Add(Order order);
+        object  Get(int id);
+        void Remove(object order);
+        void Update(Order ord);
     }
 }

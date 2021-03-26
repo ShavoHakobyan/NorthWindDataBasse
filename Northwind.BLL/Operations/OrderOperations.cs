@@ -6,6 +6,7 @@ using System.Linq;
 using Northwind.Core.Abstractions;
 using Northwind.Core.BusinessModels;
 using Northwind.Core.Abstractions.Operations;
+using Northwind.Core.Entities;
 
 namespace Northwind.BLL.Operations
 {
@@ -19,6 +20,23 @@ namespace Northwind.BLL.Operations
             _orderRepository = orderRepository;
             _logger = logger;
         }
+
+        public Order AddOrder(OrderViewModel orderView)
+        {
+            Order order = new Order
+            {
+                CustomerId = orderView.CustomerId,
+                EmployeeId = orderView.EmployeeId,
+                OrderId = orderView.OrderId,
+                ShipAddress = orderView.ShipAddress,
+                ShipName = orderView.ShipName
+            };
+            _orderRepository.Add(order);
+            _orderRepository.SaveChanges();
+            return order;
+        }
+
+       
 
         public IEnumerable<InventoryListModel> GetInventoryList()
         {
@@ -43,6 +61,8 @@ namespace Northwind.BLL.Operations
                 ShipName = order.ShipName
             };
         }
+
+       
         public IEnumerable<OrderViewModel> GetOrders()
         {
             var data = _orderRepository.Orders.GetAll();
@@ -57,5 +77,43 @@ namespace Northwind.BLL.Operations
             });
             return result;
         }
+
+        public Order RemoveOrder(int id)
+        {
+            var order = _orderRepository.Get(id);
+            _orderRepository.Remove(order);
+            _orderRepository.SaveChanges();
+            return (Order)order;
+        }
+
+        public Order UpdateOrder(OrderViewModel orderView)
+        {
+            Order ord = new Order
+            {
+                OrderId = orderView.OrderId
+            };
+            if (orderView.CustomerId != null)
+            {
+                ord.CustomerId = orderView.CustomerId;
+            }
+            if (orderView.EmployeeId != null)
+            {
+                ord.CustomerId = orderView.CustomerId;
+            }
+            if (orderView.ShipAddress != null)
+            {
+                ord.ShipAddress = orderView.ShipAddress;
+            }
+            if (orderView.ShipName != null)
+            {
+                ord.ShipName = orderView.ShipName;
+            }
+
+            _orderRepository.Update(ord);
+            _orderRepository.SaveChanges();
+            return ord;
+        }
+
+     
     }
 }

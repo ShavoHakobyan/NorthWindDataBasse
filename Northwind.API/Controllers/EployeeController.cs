@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
+using System.Net.Http;
 
 namespace Northwind.API.Controllers
 {
@@ -32,6 +33,6 @@ namespace Northwind.API.Controllers
             var result = _employeeOperations.GetModel();
             return Ok(result);
         }
-
+       
     }
 }

@@ -44,7 +44,33 @@ namespace Northwind.Controllers
             return Ok(result);
         }
 
+        [HttpPut]
+        public IActionResult UpdateOrder([FromBody] OrderViewModel model)
+        {
+            var res = _orderOperations.UpdateOrder(model);
+            if (res == null)
+                return BadRequest();
+            return Ok(res);
+        }
 
+        [HttpPost]
+        public IActionResult AddOrder([FromBody] OrderViewModel model)
+        {
+            var res = _orderOperations.AddOrder(model);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return Created("", res);
+        }
+        [HttpDelete("{id}")]
+        public IActionResult RemoveOrder([FromRoute] int id)
+        {
+            var res = _orderOperations.RemoveOrder(id);
+            if (res == null)
+                return BadRequest();
+            return Ok();
+        }
 
     }
 }

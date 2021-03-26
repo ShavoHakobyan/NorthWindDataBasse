@@ -14,5 +14,6 @@ namespace Northwind.Core.Abstractions.Repositories
         IEnumerable<T> GetAll();
         T GetSingle(Func<T, bool> predicate);
         T Get(int id);
+
     }
 }

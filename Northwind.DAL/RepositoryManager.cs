@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions;
 using Northwind.Core.Abstractions.Repositories;
+using Northwind.Core.Entities;
 
 namespace Northwind.DAL
 {
@@ -52,6 +53,31 @@ namespace Northwind.DAL
             await _dbContext.SaveChangesAsync();
         }
 
-       
+        
+
+      
+
+        public void Add(Order order)
+        {
+            _dbContext.Add(order);
+        }
+
+        public  object  Get(int id)
+        {
+           
+            return _dbContext.GetType();
+        }
+
+        
+
+        public void Update(Order ord)
+        {
+            _dbContext.Update(ord);
+        }
+
+        public void Remove(object order)
+        {
+            _dbContext.Remove(order);
+        }
     }
 }

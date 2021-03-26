@@ -12,6 +12,11 @@ namespace Northwind.Core.Abstractions.Operations
 
         IEnumerable<InventoryListModel> GetInventoryList();
         IEnumerable<OrderViewModel> GetOrders();
+
         OrderViewModel GetOrder(int id);
+
+        Order UpdateOrder(OrderViewModel orderView);
+        Order AddOrder(OrderViewModel orderView);
+        Order RemoveOrder(int id);
     }
 }
