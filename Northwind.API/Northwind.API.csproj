@@ -19,9 +19,5 @@
     <ProjectReference Include="..\Northwind.DAL\Northwind.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Logs\" />
-  </ItemGroup>
-
 
 </Project>
