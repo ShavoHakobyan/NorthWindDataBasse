@@ -12,18 +12,23 @@ namespace Northwind.DAL.Repositories
         public CustomerRepository(NorthwindContext dbContext) : base(dbContext)
         {
         }
-        public IEnumerable<Customer31> GetCustomer31()
+        
+        public IEnumerable<CustomerViewModel> GetModel24()
         {
-            var query = (from customer in Context.Customers
-                         join order in Context.Orders on customer.CustomerId equals order.CustomerId
-                         where order.CustomerId == null && order.EmployeeId == 4
-                         select new Customer31
-                         {
-                             CustomerId = customer.CustomerId,
-                             id = order.CustomerId
-                         }).ToList();
-            return query;
+            var Query = from c in Context.Customers
+
+                     orderby c.Region, c.CustomerId
+                     
+                        select new CustomerViewModel
+                        {
+                            CustomerId = c.CustomerId,
+                            CompanyName = c.CompanyName,
+                            Region = c.Region
+
+                        };
+            return Query.ToList();
         }
+
 
     }
 }

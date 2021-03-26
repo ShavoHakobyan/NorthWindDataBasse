@@ -36,9 +36,14 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
-        public IEnumerable<Customer31> GetCustomer31()
+        public IEnumerable<CustomerViewModel> GetModel24()
         {
-            return _customerRepository.Customers.GetCustomer31();
+            return _customerRepository.Customers.GetModel24();
         }
+
+        //public IEnumerable<Customer31> GetCustomer31()
+        //{
+        //    return _customerRepository.Customers.GetCustomer31();
+        //}
     }
 }

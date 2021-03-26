@@ -45,6 +45,9 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
-
+        public IEnumerable<EmployeeViewModel> GetModel()
+        {
+            return _employeeRepository.Employee.GetModel();
+        }
     }
 }

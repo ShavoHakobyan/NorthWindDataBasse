@@ -25,6 +25,13 @@ namespace Northwind.API.Controllers
             var result = _employeeOperations.GetEmployes();
             return Ok(result);
         }
+        
+        [HttpGet("GetModel")]
+        public IActionResult GetModel()
+        {
+            var result = _employeeOperations.GetModel();
+            return Ok(result);
+        }
 
     }
 }

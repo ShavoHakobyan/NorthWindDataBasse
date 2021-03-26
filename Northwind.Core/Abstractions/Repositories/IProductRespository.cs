@@ -6,8 +6,9 @@ using Northwind.Core.BusinessModels;
 
 namespace Northwind.Core.Abstractions.Repositories
 {
-    public interface IProductRespository : IRepositoryBase<Product>
+    public interface IProductRespository : IRepositoryBase<Entities.Product>
     {
-        IEnumerable<InventoryListModel> GetCatecoresProduct();
+        // IEnumerable<InventoryListModel> GetCatecoresProduct();
+        IEnumerable<MyViewQuery> GetCatecoresProduct();
     }
 }

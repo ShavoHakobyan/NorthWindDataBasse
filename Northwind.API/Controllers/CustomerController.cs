@@ -24,10 +24,10 @@ namespace Northwind.API.Controllers
             var result = _customerOperations.GetCustomer();
             return Ok(result);
         }
-        [HttpGet("GetCustomer31")]
+        [HttpGet("GetCustomer24")]
         public IActionResult Get31()
         {
-            var result = _customerOperations.GetCustomer31();
+            var result = _customerOperations.GetModel24();
             return Ok(result);
         }
 

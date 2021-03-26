@@ -14,27 +14,24 @@ namespace Northwind.DAL.Repositories
            : base(dbContext)
         {
         }
-
      
-
-        public IEnumerable<InventoryListModel> GetCatecoresProduct()
+        public IEnumerable<MyViewQuery> GetCatecoresProduct()
         {
-
             var VMCategory = from p in Context.Products
-                             join categ in Context.Categories on p.CategoryId equals categ.CategoryId
-                             group  categ.CategoryName by p into x
-                             orderby x
-                             select new InventoryListModel
+                             where !(p.UnitsInStock + p.UnitsOnOrder > p.ReorderLevel || !p.Discontinued)
+                             orderby p.ProductId
+                             select new MyViewQuery
                              {
-                                
-                                 ProductName= x.Key.ProductName,
-                                 ProductId = x.Key.ProductId
-                                 
+                                 ProductName= p.ProductName,
+                                 ProductId = p.ProductId,
+                                 UnitsInStock = p.UnitsInStock,
+                                 ReorderLevel = p.ReorderLevel,
+                                 Discontinued = p.Discontinued
                              };
             return VMCategory.ToList(); 
           
         }
 
-        
+       
     }
 }

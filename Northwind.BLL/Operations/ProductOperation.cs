@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Northwind.Core.Abstractions;
+using Northwind.Core.Entities;
 
 namespace Northwind.BLL.Operations
 {
@@ -18,11 +19,11 @@ namespace Northwind.BLL.Operations
             _productRespository = productRespository;
         }
 
-        public IEnumerable<InventoryListModel> GetCatecoresProduct()
+        public IEnumerable<MyViewQuery> GetCatecoresProduct()
         {
             return _productRespository.Product.GetCatecoresProduct();
         }
-        public IEnumerable<ProductViewModel> GetProduct()
+        public IEnumerable<Core.BusinessModels.ProductViewModel> GetProduct()
         {
             var data = _productRespository.Product.GetAll();
             var result = data.Select(x => new ProductViewModel

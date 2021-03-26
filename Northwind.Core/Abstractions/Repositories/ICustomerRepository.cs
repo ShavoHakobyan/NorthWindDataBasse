@@ -8,6 +8,7 @@ namespace Northwind.Core.Abstractions.Repositories
 {
     public  interface ICustomerRepository: IRepositoryBase<Customer>
     {
-        IEnumerable<Customer31> GetCustomer31();
+        // IEnumerable<Customer31> GetCustomer31();
+        IEnumerable<CustomerViewModel> GetModel24();
     }
 }

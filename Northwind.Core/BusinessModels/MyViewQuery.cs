@@ -4,13 +4,14 @@ using System.Text;
 
 namespace Northwind.Core.BusinessModels
 {
-    public class ProductViewModel
+    public class MyViewQuery
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int? SupplierId { get; set; }
-        public int? CategoryId { get; set; }
-        public string QuantityPerUnit { get; set; }
        
+        public short? UnitsInStock { get; set; }
+        public short? UnitsOnOrder { get; set; }
+        public short? ReorderLevel { get; set; }
+        public bool Discontinued { get; set; }
     }
 }
