@@ -57,27 +57,5 @@ namespace Northwind.DAL
 
       
 
-        public void Add(Order order)
-        {
-            _dbContext.Add(order);
-        }
-
-        public  object  Get(int id)
-        {
-           
-            return _dbContext.GetType();
-        }
-
-        
-
-        public void Update(Order ord)
-        {
-            _dbContext.Update(ord);
-        }
-
-        public void Remove(object order)
-        {
-            _dbContext.Remove(order);
-        }
     }
 }

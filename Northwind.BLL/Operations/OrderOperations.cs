@@ -7,6 +7,8 @@ using Northwind.Core.Abstractions;
 using Northwind.Core.BusinessModels;
 using Northwind.Core.Abstractions.Operations;
 using Northwind.Core.Entities;
+using System.Threading.Tasks;
+
 
 namespace Northwind.BLL.Operations
 {
@@ -21,22 +23,36 @@ namespace Northwind.BLL.Operations
             _logger = logger;
         }
 
-        public Order AddOrder(OrderViewModel orderView)
+        public Order Add(OrderViewModel model)
         {
-            Order order = new Order
-            {
-                CustomerId = orderView.CustomerId,
-                EmployeeId = orderView.EmployeeId,
-                OrderId = orderView.OrderId,
-                ShipAddress = orderView.ShipAddress,
-                ShipName = orderView.ShipName
-            };
-            _orderRepository.Add(order);
-            _orderRepository.SaveChanges();
-            return order;
+            throw new System.NotImplementedException();
         }
 
-       
+        public async Task Delete(int id)
+        {
+           
+            var order =  _orderRepository.Orders.Get(id);
+            _orderRepository.Orders.Remove(order);
+            await _orderRepository.SaveChangesAsync();
+        }
+
+        public Order Edit(OrderViewModel model)
+        {
+            _logger.LogInformation("OrderOperations --- Edit method started");
+            Order order = new Order
+            {
+                OrderId = model.OrderId
+            };
+            order.CustomerId = model.CustomerId;
+            order.EmployeeId = model.EmployeeId;
+            order.ShipAddress = model.ShipAddress;
+            order.ShipName = model.ShipName;
+
+            _orderRepository.Orders.Update(order);
+            _orderRepository.SaveChanges();
+            _logger.LogInformation("OrderOperations --- Edit method finished");
+            return order;
+        }
 
         public IEnumerable<InventoryListModel> GetInventoryList()
         {
@@ -78,42 +94,6 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
-        public Order RemoveOrder(int id)
-        {
-            var order = _orderRepository.Get(id);
-            _orderRepository.Remove(order);
-            _orderRepository.SaveChanges();
-            return (Order)order;
-        }
-
-        public Order UpdateOrder(OrderViewModel orderView)
-        {
-            Order ord = new Order
-            {
-                OrderId = orderView.OrderId
-            };
-            if (orderView.CustomerId != null)
-            {
-                ord.CustomerId = orderView.CustomerId;
-            }
-            if (orderView.EmployeeId != null)
-            {
-                ord.CustomerId = orderView.CustomerId;
-            }
-            if (orderView.ShipAddress != null)
-            {
-                ord.ShipAddress = orderView.ShipAddress;
-            }
-            if (orderView.ShipName != null)
-            {
-                ord.ShipName = orderView.ShipName;
-            }
-
-            _orderRepository.Update(ord);
-            _orderRepository.SaveChanges();
-            return ord;
-        }
-
-     
+       
     }
 }

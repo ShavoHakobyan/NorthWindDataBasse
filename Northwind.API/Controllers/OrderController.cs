@@ -28,49 +28,36 @@ namespace Northwind.Controllers
             var result = _orderOperations.GetOrders();
             return Ok(result);
         }
-      
+
 
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            
+
             var result = _orderOperations.GetOrder(id);
             return Ok(result);
         }
-        [HttpGet("inventory")]
-        public IActionResult GetInventoryList()
-        {
-            var result = _orderOperations.GetInventoryList();
-            return Ok(result);
-        }
 
+        
         [HttpPut]
-        public IActionResult UpdateOrder([FromBody] OrderViewModel model)
+        public IActionResult Edit([FromBody] OrderViewModel model)
         {
-            var res = _orderOperations.UpdateOrder(model);
-            if (res == null)
-                return BadRequest();
+            var res = _orderOperations.Edit(model);
             return Ok(res);
         }
 
-        [HttpPost]
-        public IActionResult AddOrder([FromBody] OrderViewModel model)
-        {
-            var res = _orderOperations.AddOrder(model);
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            return Created("", res);
-        }
         [HttpDelete("{id}")]
-        public IActionResult RemoveOrder([FromRoute] int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var res = _orderOperations.RemoveOrder(id);
-            if (res == null)
-                return BadRequest();
-            return Ok();
-        }
+            //var delete = _orderOperations.GetOrder(id);
+            //if (delete == null)
+            //{
+            //    return NotFound();
+            //}
+            await _orderOperations.Delete(id);
+            return NoContent();
 
+
+        }
     }
 }

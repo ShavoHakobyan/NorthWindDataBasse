@@ -9,5 +9,6 @@ namespace Northwind.Core.Abstractions.Repositories
     public interface IOrderRepository : IRepositoryBase<Order>
     {
         IEnumerable<InventoryListModel> GetInventoryList();
+       
     }
 }

@@ -22,10 +22,6 @@ namespace Northwind.Core.Abstractions
         void SaveChanges();
         Task SaveChangesAsync();
        
-       
-        void Add(Order order);
-        object  Get(int id);
-        void Remove(object order);
-        void Update(Order ord);
+      
     }
 }
