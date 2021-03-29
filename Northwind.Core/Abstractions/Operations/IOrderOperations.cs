@@ -18,8 +18,8 @@ namespace Northwind.Core.Abstractions.Operations
        // Order Remove(int id);
         Order Edit(OrderViewModel model);
         Order Add(OrderViewModel model);
-
-        Task Delete(int id);
+       // void Remove(int id);
+        Task Remove(int id);
 
     }
 }

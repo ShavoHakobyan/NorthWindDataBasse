@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
+using Microsoft.AspNetCore.Authorization;
+using Northwind.Core.Entities;
 
 namespace Northwind.Controllers
 {
@@ -38,26 +40,20 @@ namespace Northwind.Controllers
             return Ok(result);
         }
 
-        
+
         [HttpPut]
         public IActionResult Edit([FromBody] OrderViewModel model)
         {
             var res = _orderOperations.Edit(model);
             return Ok(res);
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public IActionResult Remove([FromRoute] int id)
         {
-            //var delete = _orderOperations.GetOrder(id);
-            //if (delete == null)
-            //{
-            //    return NotFound();
-            //}
-            await _orderOperations.Delete(id);
-            return NoContent();
-
-
+            _orderOperations.Remove(id);
+            return Ok();
         }
+
     }
 }

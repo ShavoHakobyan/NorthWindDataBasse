@@ -28,7 +28,7 @@ namespace Northwind.BLL.Operations
             throw new System.NotImplementedException();
         }
 
-        public async Task Delete(int id)
+        public async Task Remove(int id)
         {
            
             var order =  _orderRepository.Orders.Get(id);
@@ -94,6 +94,12 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
-       
+
+        //public void Remove(int id)
+        //{
+        //    var order = _orderRepository.Orders.Get(id);
+        //    _orderRepository.Orders.Remove(order);
+        //     _orderRepository.SaveChangesAsync();
+        //}
     }
 }
