@@ -25,7 +25,21 @@ namespace Northwind.BLL.Operations
 
         public Order Add(OrderViewModel model)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("OrderOperations --- Edit method started");
+            Order order = new Order
+            {
+                OrderId = model.OrderId,
+
+
+                CustomerId = model.CustomerId,
+                EmployeeId = model.EmployeeId,
+                ShipAddress = model.ShipAddress,
+                ShipName = model.ShipName
+        };
+            _orderRepository.Orders.Update(order);
+            _orderRepository.SaveChanges();
+            _logger.LogInformation("OrderOperations --- Edit method finished");
+            return order;
         }
 
         public async Task Remove(int id)

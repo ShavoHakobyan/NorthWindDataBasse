@@ -44,10 +44,15 @@ namespace Northwind.Controllers
         [HttpPut]
         public IActionResult Edit([FromBody] OrderViewModel model)
         {
-            var res = _orderOperations.Edit(model);
-            return Ok(res);
+            var result = _orderOperations.Edit(model);
+            return Ok(result);
         }
-        //[Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult Create([FromBody] OrderViewModel model)
+        {
+            var resesult = _orderOperations.Add(model);
+            return Created(" ",resesult);
+        }
         [HttpDelete("{id}")]
         public IActionResult Remove([FromRoute] int id)
         {
