@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Northwind.Core.BusinessModels;
+
 using Northwind.Core.Entities;
 
 namespace Northwind.Core.Abstractions.Repositories
@@ -10,5 +11,6 @@ namespace Northwind.Core.Abstractions.Repositories
     {
         // IEnumerable<Customer31> GetCustomer31();
         IEnumerable<CustomerViewModel> GetModel24();
+        void Add(CustomerRegistrPostModel model);
     }
 }

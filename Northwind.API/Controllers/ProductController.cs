@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
+using Northwind.Core.BusinessModels;
 
 namespace Northwind.API.Controllers
 {
@@ -30,6 +31,28 @@ namespace Northwind.API.Controllers
         {
             var result = _productOperations.GetCatecoresProduct();
             return Ok(result);
+        }
+        //[HttpPost]
+        //public IActionResult Post([FromBody] ProductRegistrPostModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //        _productOperations.Add(model);
+        //    else
+        //        return BadRequest("Not all parameters have filled");
+
+        //    return Created("", model);
+        //}
+        [HttpPut]
+        public IActionResult Edit([FromBody] ProductViewModel model)
+        {
+            var res = _productOperations.Edit(model);
+            return Ok(res);
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Remove([FromRoute] int id)
+        {
+           _productOperations.Remove(id);
+            return Ok();
         }
     }
 }

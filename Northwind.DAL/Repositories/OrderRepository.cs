@@ -6,6 +6,7 @@ using System.Text;
 using System.Linq;
 using Northwind.Core.Abstractions.Repositories;
 using Northwind.Core.BusinessModels;
+using Northwind.Core.BusinessModels;
 
 namespace Northwind.DAL.Repositories
 {
@@ -16,7 +17,19 @@ namespace Northwind.DAL.Repositories
         {
         }
 
-        
+        public void Add(OrderRegistrPostMode model)
+        {
+            Context.Orders.Add(new Order
+            {
+                CustomerId = model.CustomerId,
+                EmployeeId = model.EmployeeId,
+                Freight = model.Freight,
+                ShipAddress = model.ShipAddress,
+                ShipName = model.ShipName,
+                ShipCountry = model.ShipCountry,
+                ShipCity = model.ShipCity
+            });
+        }
 
         public IEnumerable<InventoryListModel> GetInventoryList()
         {

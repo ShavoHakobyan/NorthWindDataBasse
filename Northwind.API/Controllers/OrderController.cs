@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
 using Microsoft.AspNetCore.Authorization;
 using Northwind.Core.Entities;
+using Northwind.Core.BusinessModels;
 
 namespace Northwind.Controllers
 {
@@ -41,17 +42,24 @@ namespace Northwind.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Add([FromBody] OrderRegistrPostMode model)
+        {
+            if (ModelState.IsValid)
+            {
+                _orderOperations.Add(model);
+            }
+            else
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
         [HttpPut]
         public IActionResult Edit([FromBody] OrderViewModel model)
         {
-            var result = _orderOperations.Edit(model);
-            return Ok(result);
-        }
-        [HttpPost]
-        public IActionResult Create([FromBody] OrderViewModel model)
-        {
-            var resesult = _orderOperations.Add(model);
-            return Created(" ",resesult);
+            var res = _orderOperations.Edit(model);
+            return Ok(res);
         }
         [HttpDelete("{id}")]
         public IActionResult Remove([FromRoute] int id)

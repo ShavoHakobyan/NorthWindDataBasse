@@ -5,6 +5,7 @@ using System.Text;
 using Northwind.Core.BusinessModels;
 using System.Threading.Tasks;
 
+
 namespace Northwind.Core.Abstractions.Operations
 {
     public interface IOrderOperations
@@ -15,10 +16,8 @@ namespace Northwind.Core.Abstractions.Operations
         IEnumerable<OrderViewModel> GetOrders();
         OrderViewModel GetOrder(int id);
 
-       // Order Remove(int id);
         Order Edit(OrderViewModel model);
-        Order Add(OrderViewModel model);
-       // void Remove(int id);
+        public void Add(OrderRegistrPostMode model);
         Task Remove(int id);
 
     }

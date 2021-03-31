@@ -27,10 +27,8 @@ namespace Northwind.BLL.Operations
 
         public async Task Login(LoginModel model, HttpContext context)
         {
-            Usser user = _repositories.Users.GetSingle(u => u.Email == model.Email 
-            && u.Password == model.Password)
+            var user = _repositories.Users.GetSingle(u => u.Email == model.Email && u.Password == model.Password && u.Role == Role.User)
                 ?? throw new LogicExecption("Wrong username or password");
-
             await Authenticate(user, context);
         }
 
@@ -41,40 +39,35 @@ namespace Northwind.BLL.Operations
 
         public async Task Register(RegisterModel model, HttpContext context)
         {
-            Usser user = _repositories.Users.GetSingle(u => u.Email == model.Email);
+            User user = _repositories.Users.GetSingle(u => u.Email == model.Email);
             if (user == null)
             {
-                user = new Usser
+                user = new User
                 {
+                    Role = Role.User,
                     Email = model.Email,
-                    Password = model.Password,
-                    Role = Role.User
+                    Password = model.Password
                 };
                 _repositories.Users.Add(user);
                 await _repositories.SaveChangesAsync();
-
                 await Authenticate(user, context);
             }
             else
-            {
                 throw new LogicExecption("User already exists");
-            }
-
         }
-
-
-        private async Task Authenticate(Usser user, HttpContext context)
+        public async Task Authenticate(User user, HttpContext context)
         {
-
+            
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType,user.Role.ToString())
             };
-
+            
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
+            
             await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
         }
     }
 }

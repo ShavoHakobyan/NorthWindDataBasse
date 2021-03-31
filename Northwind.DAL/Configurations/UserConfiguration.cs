@@ -1,22 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 using Northwind.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NLayerArchitecure.DAL.Configurations
+namespace Northwind.DAL.Configurations
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<Usser>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Usser> builder)
+        public void Configure(EntityTypeBuilder<User> entity)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Email).HasColumnType("VARCHAR(100)");
-            builder.Property(x => x.Password).HasColumnType("VARCHAR(100)");
-            builder.Property(x => x.Role).HasColumnType("int");
-           
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.Email).HasColumnType("VARCHAR(100)");
+            entity.Property(x => x.Password).HasColumnType("VARCHAR(100)");
         }
+
     }
 }

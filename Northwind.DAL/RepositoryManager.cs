@@ -38,11 +38,7 @@ namespace Northwind.DAL
         public IOrderDetalsRepository OrderDetail => _orderDetail ?? (_orderDetail = new OrderDetailRepository(_dbContext));
         public IUserRepository Users => _users ?? (_users = new UserRepository(_dbContext));
 
-        public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-        {
-            return new DatabaseTransaction(_dbContext, isolationLevel);
-        }
-
+      
         public void SaveChanges()
         {
             _dbContext.SaveChanges();
@@ -53,9 +49,6 @@ namespace Northwind.DAL
             await _dbContext.SaveChangesAsync();
         }
 
-        
-
-      
-
+       
     }
 }

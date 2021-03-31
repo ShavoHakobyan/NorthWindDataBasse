@@ -18,10 +18,9 @@ namespace Northwind.Core.Abstractions
         public IUserRepository Users { get; }
         public IOrderDetalsRepository OrderDetail { get; }
 
-        public IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+       
         void SaveChanges();
         Task SaveChangesAsync();
-       
       
     }
 }

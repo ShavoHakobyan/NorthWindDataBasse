@@ -23,50 +23,17 @@ namespace Northwind.BLL.Operations
             _logger = logger;
         }
 
-        public Order Add(OrderViewModel model)
-        {
-            _logger.LogInformation("OrderOperations --- Edit method started");
-            Order order = new Order
-            {
-                OrderId = model.OrderId,
-
-
-                CustomerId = model.CustomerId,
-                EmployeeId = model.EmployeeId,
-                ShipAddress = model.ShipAddress,
-                ShipName = model.ShipName
-        };
-            _orderRepository.Orders.Update(order);
-            _orderRepository.SaveChanges();
-            _logger.LogInformation("OrderOperations --- Edit method finished");
-            return order;
-        }
+       
 
         public async Task Remove(int id)
         {
-           
-            var order =  _orderRepository.Orders.Get(id);
+
+            var order = _orderRepository.Orders.Get(id);
             _orderRepository.Orders.Remove(order);
             await _orderRepository.SaveChangesAsync();
         }
 
-        public Order Edit(OrderViewModel model)
-        {
-            _logger.LogInformation("OrderOperations --- Edit method started");
-            Order order = new Order
-            {
-                OrderId = model.OrderId
-            };
-            order.CustomerId = model.CustomerId;
-            order.EmployeeId = model.EmployeeId;
-            order.ShipAddress = model.ShipAddress;
-            order.ShipName = model.ShipName;
 
-            _orderRepository.Orders.Update(order);
-            _orderRepository.SaveChanges();
-            _logger.LogInformation("OrderOperations --- Edit method finished");
-            return order;
-        }
 
         public IEnumerable<InventoryListModel> GetInventoryList()
         {
@@ -92,7 +59,7 @@ namespace Northwind.BLL.Operations
             };
         }
 
-       
+
         public IEnumerable<OrderViewModel> GetOrders()
         {
             var data = _orderRepository.Orders.GetAll();
@@ -108,12 +75,34 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
+        public Order Edit(OrderViewModel model)
+        {
+            _logger.LogInformation("OrderOperations --- Edit method started");
+            var order1 = _orderRepository.Orders.Get(model.OrderId) ?? throw new LogicExecption("Wrong Order Id");
 
-        //public void Remove(int id)
-        //{
-        //    var order = _orderRepository.Orders.Get(id);
-        //    _orderRepository.Orders.Remove(order);
-        //     _orderRepository.SaveChangesAsync();
-        //}
+
+            order1.CustomerId = order1.CustomerId;
+            order1.EmployeeId = model.EmployeeId;
+            order1.ShipAddress = model.ShipAddress;
+            order1.ShipName = model.ShipName;
+
+            _orderRepository.Orders.Update(order1);
+            _orderRepository.SaveChanges();
+            _logger.LogInformation("OrderOperations --- Edit method finished");
+            return order1;
+        }
+
+        public void Add(OrderRegistrPostMode model)
+        {
+            var customer = _orderRepository.Customers.GetSingle(u => u.CustomerId == model.CustomerId);
+            if (customer == null)
+                throw new LogicExecption("There is no customer with that Id");
+            var employee = _orderRepository.Employee.Get(model.EmployeeId);
+            if (employee == null)
+                throw new LogicExecption("There is no employee with that Id");
+            _orderRepository.Orders.Add(model);
+            _orderRepository.SaveChanges();
+        }
     }
+
 }

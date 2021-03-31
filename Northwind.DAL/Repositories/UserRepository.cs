@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Northwind.DAL.Repositories
 {
-   public class UserRepository : RepositoryBase<Usser>,IUserRepository
+   public class UserRepository : RepositoryBase<User>,IUserRepository
     {
         public UserRepository(NorthwindContext context)
             :base(context)

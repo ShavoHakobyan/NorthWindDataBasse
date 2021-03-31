@@ -14,7 +14,27 @@ namespace Northwind.DAL.Repositories
            : base(dbContext)
         {
         }
-     
+
+        public void Add(ProductRegistrPostModel model)
+        {
+            Context.Products.Add(new Product
+            {
+               
+                CategoryId = model.CategoryId,
+                Discontinued = model.Discontinued,
+               
+                UnitsOnOrder = model.UnitsOnOrder,
+                ProductName = model.ProductName,
+                UnitPrice = model.UnitPrice,
+                UnitsInStock = model.UnitsInStock,
+                SupplierId = model.SupplierId,
+                QuantityPerUnit = model.QuantityPerUnit
+
+                
+
+            });
+        }
+
         public IEnumerable<MyViewQuery> GetCatecoresProduct()
         {
             var VMCategory = from p in Context.Products

@@ -6,6 +6,7 @@ using Northwind.Core.Abstractions.Repositories;
 using Northwind.Core.BusinessModels;
 using System.Linq;
 
+
 namespace Northwind.DAL.Repositories
 {
     public class EmployeeRepository : RepositoryBase<Employee>,IEmployeeRepository
@@ -13,6 +14,21 @@ namespace Northwind.DAL.Repositories
         public EmployeeRepository(NorthwindContext dbContext) : base(dbContext)
         {
 
+        }
+
+        public void Add(EmployeeRegisterPostModel model)
+        {
+            Context.Employees.Add(new Employee
+            {
+                BirthDate = model.BirthDate,
+                City = model.City,
+                Country = model.Country,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Region = model.Region,
+                Title = model.Title,
+                TitleOfCourtesy = model.TitleOfCourtesy
+            });
         }
 
         public IEnumerable<EmployeeViewModel> GetModel()

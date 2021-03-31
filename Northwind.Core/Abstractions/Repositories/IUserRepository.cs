@@ -2,7 +2,7 @@
 
 namespace Northwind.Core.Abstractions.Repositories
 {
-    public interface IUserRepository : IRepositoryBase<Usser>
+    public interface IUserRepository : IRepositoryBase<User>
     {
     }
 }

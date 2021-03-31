@@ -12,12 +12,12 @@ namespace Northwind.Core.BusinessModels
         public string ProductName { get; set; }
         public short Quantity { get; set; }
 
-        // categores
+       
         public string CategoryName { get; set; }
 
         public int ProductId { get; set; }
 
         public int TutoryalCount { get; set; }
-        //public 
+       
     }
 }
