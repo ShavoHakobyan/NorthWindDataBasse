@@ -33,20 +33,15 @@ namespace Northwind.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<NorthwindContext>(x =>
-            {
-                x.UseSqlServer(Configuration.GetConnectionString("default"));
-            });
+            services.AddDbContext<NorthwindContext>(x => x.UseSqlServer(Configuration.GetConnectionString("default")));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-             .AddCookie(options => //CookieAuthenticationOptions
-             {
-             //    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-             });
+             .AddCookie(options => { });
+            services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindDataBasse", Version = "v1" });
             });
-            services.AddControllers();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddScoped<IOrderOperations, OrderOperations>();
 
@@ -55,26 +50,17 @@ namespace Northwind.API
             services.AddScoped<ICustomerOperation, CustomerOperation>();
             services.AddScoped<IUserOperations, UserOperations>();
             services.AddScoped<IOrderDetailOperation, OrderDetailOperation>();
-            //services.AddSwaggerGen();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             app.UseMiddleware<ErrorHandlingMiddleware>();
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             app.UseStaticFiles();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
