@@ -16,9 +16,10 @@ namespace Northwind.Core.Abstractions
         public IProductRespository Product { get; }
         public IEmployeeRepository Employee { get; }
         public IUserRepository Users { get; }
-        public IOrderDetalsRepository OrderDetail { get; }
 
-       
+        public ISupplierRepositor supplier { get; }
+        public ICategoryRepository Categories { get; }
+
         void SaveChanges();
         Task SaveChangesAsync();
       

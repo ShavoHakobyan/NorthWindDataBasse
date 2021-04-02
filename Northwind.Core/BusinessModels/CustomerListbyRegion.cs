@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Northwind.Core.BusinessModels
 {
-    public class Customer31
+    public class CustomerListbyRegion
     {
         public string CustomerId { get; set; }
+        public string CompanyName { get; set; }
+        public string Region { get; set; }
     }
 }

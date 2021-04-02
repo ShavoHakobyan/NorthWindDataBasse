@@ -10,6 +10,7 @@ using Northwind.Core.Entities;
 using Microsoft.Extensions.Logging;
 using Northwind.Core.Execption;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Northwind.BLL.Operations
 {
@@ -25,17 +26,25 @@ namespace Northwind.BLL.Operations
 
         public void Add(ProductRegistrPostModel model)
         {
-            var product = _productRespository.Product.GetSingle(u => u.ProductId == model.ProductId);
-            if (product != null)
-                throw new LogicExecption("There is no Product with that Id");
-            //  var categpry = _productRespository.OrderDetail.GetSingle(u => u.ca== model.CategoryId);
-            //if (categpry == null)
-            //    throw new LogicExecption("There is no employee with that Id");
-            _productRespository.Product.Add(model);
+            _logger.LogInformation($"{MethodBase.GetCurrentMethod().Name} started");
+            var supplier = _productRespository.supplier.Get((int)model.SupplierId);
+            if (supplier == null)
+                throw new LogicExecption("There is no supplier with that Id");
+            var category = _productRespository.Categories.Get((int)model.CategoryId);
+            if (category == null)
+                throw new LogicExecption("There is no category with that Id");
+            _productRespository.Product.Add(new Product
+            {
+                CategoryId = model.CategoryId,
+                Discontinued = model.Discontinued,
+                ProductName = model.ProductName,
+                QuantityPerUnit = model.QuantityPerUnit,
+                SupplierId = model.SupplierId,
+                UnitPrice = model.UnitPrice,
+                UnitsInStock = model.UnitsInStock
+            });
             _productRespository.SaveChanges();
-
-            _productRespository.Product.Add(model);
-            _productRespository.SaveChanges();
+            _logger.LogInformation($"{MethodBase.GetCurrentMethod().Name} finished");
         }
 
 
@@ -76,6 +85,18 @@ namespace Northwind.BLL.Operations
             });
             return result;
 
+        }
+
+        public IEnumerable<ProductsNeedReordering> GetProductsneedreorderings()
+        {
+            _logger.LogInformation("ProductOperation --- Number_22");
+            return _productRespository.Product.GetProductsneedreorderings();
+        }
+
+        public IEnumerable<ProductsThatNeedReordering> GetProductsthatneedreorderings()
+        {
+            _logger.LogInformation("ProductOperation --- Number_23");
+            return _productRespository.Product.GetProductsthatneedreorderings();
         }
 
         public async Task Remove(int id)

@@ -31,7 +31,7 @@ namespace Northwind.DAL
         public virtual DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetals { get; set; }
         public virtual DbSet<OrderDetailsExtended> OrderDetailsExtendeds { get; set; }
         public virtual DbSet<OrderSubtotal> OrderSubtotals { get; set; }
         public virtual DbSet<OrdersQry> OrdersQries { get; set; }

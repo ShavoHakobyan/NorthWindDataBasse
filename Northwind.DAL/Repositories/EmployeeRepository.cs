@@ -35,7 +35,7 @@ namespace Northwind.DAL.Repositories
         {
             var query = (from e in Context.Employees
                             join or in Context.Orders on e.EmployeeId equals or.EmployeeId
-                            join ord in Context.OrderDetails on or.OrderId equals ord.OrderId
+                            join ord in Context.OrderDetals on or.OrderId equals ord.OrderId
                             group e by new
                             {
                                 e.EmployeeId,

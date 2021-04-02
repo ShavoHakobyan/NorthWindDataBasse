@@ -55,6 +55,12 @@ namespace Northwind.Controllers
             var result = _orderOperations.GetHighfreight1996();
             return Ok(result);
         }
+        [HttpGet("MonthEndOrders")]
+        public IActionResult MonthEndOrders()
+        {
+            var result = _orderOperations.GetMonthendorders();
+            return Ok(result);
+        }
         [HttpPost]
         public IActionResult Add([FromBody] OrderRegistrPostMode model)
         {

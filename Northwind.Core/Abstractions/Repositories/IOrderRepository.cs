@@ -14,6 +14,7 @@ namespace Northwind.Core.Abstractions.Repositories
         
         IEnumerable<HighFreightOrders> GetHighfreight_25();
         IEnumerable<HighFreightOrders> GetHighfreight1996();
-       
+        IEnumerable<MonthEndOrders> GetMonthendorders();
+
     }
 }

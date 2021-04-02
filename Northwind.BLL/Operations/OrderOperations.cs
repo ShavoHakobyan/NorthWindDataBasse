@@ -116,7 +116,12 @@ namespace Northwind.BLL.Operations
             return _orderRepository.Orders.GetHighfreight1996();
         }
 
-      
+        public IEnumerable<MonthEndOrders> GetMonthendorders()
+        {
+            // Number 35
+            _logger.LogInformation("OrderOperation --- Number_35");
+            return _orderRepository.Orders.GetMonthendorders();
+        }
     }
 
 }

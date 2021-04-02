@@ -28,12 +28,7 @@ namespace Northwind.API.Controllers
             return Ok(result);
         }
         
-        [HttpGet("GetModel")]
-        public IActionResult GetModel()
-        {
-            var result = _employeeOperations.GetModel();
-            return Ok(result);
-        }
+       
         [HttpPost]
         public IActionResult Post([FromBody] EmployeeRegisterPostModel model)
         {
@@ -55,6 +50,13 @@ namespace Northwind.API.Controllers
         {
             _employeeOperations.Remove(id);
             return Ok();
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetById([FromRoute] int id)
+        {
+
+            var result = _employeeOperations.GetEmploe(id);
+            return Ok(result);
         }
     }
 }

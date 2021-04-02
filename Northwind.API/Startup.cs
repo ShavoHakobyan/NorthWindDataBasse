@@ -50,7 +50,7 @@ namespace Northwind.API
             services.AddScoped<IEmployeeOperation, EmployeeOperation>();
             services.AddScoped<ICustomerOperation, CustomerOperation>();
             services.AddScoped<IUserOperations, UserOperations>();
-            services.AddScoped<IOrderDetailOperation, OrderDetailOperation>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

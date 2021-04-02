@@ -11,6 +11,7 @@ namespace Northwind.Core.Abstractions.Repositories
         // IEnumerable<InventoryListModel> GetCatecoresProduct();
         IEnumerable<MyViewQuery> GetCatecoresProduct();
         void Add(ProductRegistrPostModel model);
-       
+        IEnumerable<ProductsNeedReordering> GetProductsneedreorderings();
+        IEnumerable<ProductsThatNeedReordering> GetProductsthatneedreorderings();
     }
 }

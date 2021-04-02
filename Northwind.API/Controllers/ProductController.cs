@@ -26,22 +26,17 @@ namespace Northwind.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("CategProduct")]
-        public IActionResult GetCatecoresProduct()
+       
+        [HttpPost]
+        public IActionResult Post([FromBody] ProductRegistrPostModel model)
         {
-            var result = _productOperations.GetCatecoresProduct();
-            return Ok(result);
-        }
-        //[HttpPost]
-        //public IActionResult Post([FromBody] ProductRegistrPostModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //        _productOperations.Add(model);
-        //    else
-        //        return BadRequest("Not all parameters have filled");
+            if (ModelState.IsValid)
+                _productOperations.Add(model);
+            else
+                return BadRequest("Not all parameters have filled");
 
-        //    return Created("", model);
-        //}
+            return Created("", model);
+        }
         [HttpPut]
         public IActionResult Edit([FromBody] ProductViewModel model)
         {
@@ -51,8 +46,28 @@ namespace Northwind.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Remove([FromRoute] int id)
         {
-           _productOperations.Remove(id);
+            _productOperations.Remove(id);
             return Ok();
         }
+        [HttpGet("CategProduct")]
+        public IActionResult GetCatecoresProduct()
+        {
+            var result = _productOperations.GetCatecoresProduct();
+            return Ok(result);
+        }
+        [HttpGet("Productsneedreorderings")]
+        public IActionResult Productsneedreorderings()
+        {
+            var res = _productOperations.GetProductsneedreorderings();
+            return Ok(res);
+        }
+
+        [HttpGet("Productsthatneedreorderings")]
+        public IActionResult Productsthatneedreorderings()
+        {
+            var res = _productOperations.GetProductsthatneedreorderings();
+            return Ok(res);
+        }
+       
     }
 }

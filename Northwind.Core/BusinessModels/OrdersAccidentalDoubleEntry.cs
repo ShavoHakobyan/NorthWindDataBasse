@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Northwind.Core.BusinessModels
 {
-    public class Customer31
+    public class OrdersAccidentalDoubleEntry
     {
-        public string CustomerId { get; set; }
+        public int OrderId { get; set; }
     }
 }

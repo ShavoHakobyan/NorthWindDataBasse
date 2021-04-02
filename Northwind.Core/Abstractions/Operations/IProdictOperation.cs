@@ -9,6 +9,8 @@ namespace Northwind.Core.Abstractions.Operations
 {
     public interface IProdictOperation
     {
+        IEnumerable<ProductsNeedReordering> GetProductsneedreorderings();
+        IEnumerable<ProductsThatNeedReordering> GetProductsthatneedreorderings();
         IEnumerable<ProductViewModel> GetProduct();
         IEnumerable<MyViewQuery> GetCatecoresProduct();
         Task Remove(int id);

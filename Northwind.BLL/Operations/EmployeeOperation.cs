@@ -89,5 +89,24 @@ namespace Northwind.BLL.Operations
            await _employeeRepository.SaveChangesAsync();
             
         }
+
+        public EmployeeViewModel GetEmploe(int id)
+        {
+            var emploe = _employeeRepository.Employee.Get(id) ?? throw new LogicExecption("Wrong Employee Id");
+
+            return new EmployeeViewModel
+            {
+                EmployeeId = emploe.EmployeeId,
+                Address = emploe.Address,
+                BirthDate = emploe.BirthDate,
+                City = emploe.City,
+                FirstName = emploe.FirstName,
+                HireDate = emploe.HireDate,
+                LastName = emploe.LastName,
+                Title = emploe.Title,
+                TitleOfCourtesy = emploe.TitleOfCourtesy
+            };
+            
+        }
     }
 }

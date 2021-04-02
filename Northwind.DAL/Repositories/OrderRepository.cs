@@ -64,7 +64,7 @@ namespace Northwind.DAL.Repositories
         {
             var query = from order in Context.Orders
                         join employee in Context.Employees on order.EmployeeId equals employee.EmployeeId
-                        join orderDetail in Context.OrderDetails on order.OrderId equals orderDetail.OrderId
+                        join orderDetail in Context.OrderDetals on order.OrderId equals orderDetail.OrderId
                         join product in Context.Products on orderDetail.ProductId equals product.ProductId
                         orderby order.OrderId, product.ProductId
                         select new InventoryListModel
@@ -78,9 +78,27 @@ namespace Northwind.DAL.Repositories
 
             return query.ToList();
         }
-        // public IEnumerable<>
-      
+
+        public IEnumerable<MonthEndOrders> GetMonthendorders()
+        {
+            // Number 35
+            var query = from order in Context.Orders
+                        where order.OrderDate.HasValue &&
+                        order.OrderDate.Value.AddDays(1).Month > order.OrderDate.Value.Month
+                        orderby order.EmployeeId, order.OrderId
+                        select new MonthEndOrders
+                        {
+                            OrderId = order.OrderId,
+                            EmployeeID = order.EmployeeId,
+                            OrderDate = order.OrderDate
+                        };
+            return query.ToList();
+        }
+
+
        
+
+
 
     }
 }

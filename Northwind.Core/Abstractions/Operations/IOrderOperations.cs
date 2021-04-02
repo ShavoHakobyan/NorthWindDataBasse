@@ -18,7 +18,7 @@ namespace Northwind.Core.Abstractions.Operations
 
         IEnumerable<HighFreightOrders> GetHighfreight_25();
         IEnumerable<HighFreightOrders> GetHighfreight1996();
-       
+        IEnumerable<MonthEndOrders> GetMonthendorders();
 
         Order Edit(OrderViewModel model);
         public void Add(OrderRegistrPostMode model);

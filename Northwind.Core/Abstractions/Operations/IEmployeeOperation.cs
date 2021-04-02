@@ -12,7 +12,7 @@ namespace Northwind.Core.Abstractions.Operations
     {
         IEnumerable<EmployeeViewModel> GetEmployes();
         IEnumerable<EmployeeViewModel> GetModel();
-        //
+        EmployeeViewModel GetEmploe(int id);
         public void Add(EmployeeRegisterPostModel model);
         Employee Edit(ChangeEmployeeModel model);
         Task Remove(int id);

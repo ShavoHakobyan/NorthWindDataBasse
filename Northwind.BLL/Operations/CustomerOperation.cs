@@ -79,9 +79,41 @@ namespace Northwind.BLL.Operations
             return result;
         }
 
-        public IEnumerable<CustomerViewModel> GetModel24()
+        public IEnumerable<Customer31> GetCustomer31()
         {
-            return _customerRepository.Customers.GetModel24();
+            return _customerRepository.Customers.GetCustomer31();
+        }
+
+        public IEnumerable<CustomerListbyRegion> GetCustomerlistbyregions()
+        {
+            _logger.LogInformation("CustomerOperation --- Number 24");
+            return _customerRepository.Customers.GetCustomerlistbyregions();
+        }
+
+        public IEnumerable<CustomerswithOrders> GetCustomerswithnoorders()
+        {
+            _logger.LogInformation("CustomersOperation --- Number 30");
+            return _customerRepository.Customers.GetCustomerswithnoorders();
+        }
+
+        public IEnumerable<HighValueCustomers> GetHighvaluecustomers()
+        {
+            _logger.LogInformation("CustomersOperation --- Number 32");
+            return _customerRepository.Customers.GetHighvaluecustomers();
+        }
+
+        
+        public IEnumerable<TotalCustomers> GetTotalCustomers()
+        {
+
+           _logger.LogInformation("CustomerOperation --- Number 21");
+            return _customerRepository.Customers.GetTotalCustomers();
+        }
+
+        public IEnumerable<HighValueCustomers> Highvaluecustomerstotalorders()
+        {
+            _logger.LogInformation("CustomersOperation --- Number 33");
+            return _customerRepository.Customers.Highvaluecustomerstotalorders();
         }
 
         public async Task Remove(string id)

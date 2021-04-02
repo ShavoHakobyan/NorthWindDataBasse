@@ -47,10 +47,30 @@ namespace Northwind.API.Controllers
            _customerOperations.Remove(id);
             return Ok();
         }
-        [HttpGet("GetCustomer24")]
-        public IActionResult Get31()
+        [HttpGet("Total")]
+        public IActionResult Totalcustomers()
         {
-            var result = _customerOperations.GetModel24();
+            var res = _customerOperations.GetTotalCustomers();
+            return Ok(res);
+        }
+
+        [HttpGet("listByRegion")]
+        public IActionResult Get24()
+        {
+            var result = _customerOperations.GetCustomerlistbyregions();
+            return Ok(result);
+        }
+        [HttpGet("HighValue")]
+        public IActionResult HighValue()
+        {
+            var result = _customerOperations.GetHighvaluecustomers();
+            return Ok(result);
+        }
+
+        [HttpGet("HighValueTotalOrders")]
+        public IActionResult HighValueTotalOrders()
+        {
+            var result = _customerOperations.Highvaluecustomerstotalorders();
             return Ok(result);
         }
     }
