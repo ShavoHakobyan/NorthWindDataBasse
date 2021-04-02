@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Northwind.Core.BusinessModels;
-
+using Microsoft.AspNetCore.Authorization;
 using Northwind.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
-using Microsoft.AspNetCore.Authorization;
+
 using Northwind.Core.Entities;
-using Northwind.Core.BusinessModels;
+
 
 namespace Northwind.Controllers
 {
@@ -42,6 +42,19 @@ namespace Northwind.Controllers
         }
 
 
+        [HttpGet("Highfreight")]
+        public IActionResult GetQuery_26()
+        {
+            var result = _orderOperations.GetHighfreight_25();
+            return Ok(result);
+        }
+
+        [HttpGet("Highfreight_1996")]
+        public IActionResult GetQuery_25()
+        {
+            var result = _orderOperations.GetHighfreight1996();
+            return Ok(result);
+        }
         [HttpPost]
         public IActionResult Add([FromBody] OrderRegistrPostMode model)
         {

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Northwind.Core.Abstractions.Operations;
 
+using Northwind.Core.BusinessModels;
+
 namespace Northwind.API.Controllers
 {
     [ApiController]
@@ -24,5 +26,16 @@ namespace Northwind.API.Controllers
             var result = _orderDtOperations.GetOrderDetall();
             return Ok(result);
         }
+        [HttpPost]
+        public IActionResult Post([FromBody] OrderDetailPostModel model)
+        {
+            if (ModelState.IsValid)
+                _orderDtOperations.Add(model);
+            else
+                return BadRequest("Not all parameters have filled");
+            return Created("", model);
+        }
+      
+
     }
 }

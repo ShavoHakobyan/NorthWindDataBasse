@@ -8,7 +8,7 @@ using Northwind.Core.BusinessModels;
 using Northwind.Core.Abstractions.Operations;
 using Northwind.Core.Entities;
 using System.Threading.Tasks;
-
+using Northwind.Core.BusinessModels.MyListModel;
 
 namespace Northwind.BLL.Operations
 {
@@ -103,6 +103,20 @@ namespace Northwind.BLL.Operations
             _orderRepository.Orders.Add(model);
             _orderRepository.SaveChanges();
         }
+
+        public IEnumerable<HighFreightOrders> GetHighfreight_25()
+        {
+            _logger.LogInformation("OrderOperation --- Number_25");
+            return _orderRepository.Orders.GetHighfreight_25(); 
+        }
+
+        public IEnumerable<HighFreightOrders> GetHighfreight1996()
+        {
+            _logger.LogInformation("OrderOperation --- Number_26");
+            return _orderRepository.Orders.GetHighfreight1996();
+        }
+
+      
     }
 
 }

@@ -25,12 +25,7 @@ namespace Northwind.API.Controllers
             var result = _customerOperations.GetCustomer();
             return Ok(result);
         }
-        [HttpGet("GetCustomer24")]
-        public IActionResult Get31()
-        {
-            var result = _customerOperations.GetModel24();
-            return Ok(result);
-        }
+       
         [HttpPost]
         public IActionResult Post([FromBody] CustomerRegistrPostModel model)
         {
@@ -51,6 +46,12 @@ namespace Northwind.API.Controllers
         {
            _customerOperations.Remove(id);
             return Ok();
+        }
+        [HttpGet("GetCustomer24")]
+        public IActionResult Get31()
+        {
+            var result = _customerOperations.GetModel24();
+            return Ok(result);
         }
     }
 }

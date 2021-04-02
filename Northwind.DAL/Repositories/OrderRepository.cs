@@ -6,7 +6,7 @@ using System.Text;
 using System.Linq;
 using Northwind.Core.Abstractions.Repositories;
 using Northwind.Core.BusinessModels;
-using Northwind.Core.BusinessModels;
+using Northwind.Core.BusinessModels.MyListModel;
 
 namespace Northwind.DAL.Repositories
 {
@@ -29,6 +29,35 @@ namespace Northwind.DAL.Repositories
                 ShipCountry = model.ShipCountry,
                 ShipCity = model.ShipCity
             });
+        }
+
+        public IEnumerable<HighFreightOrders> GetHighfreight1996()
+        {
+            // N_26
+            var query = (from order in Context.Orders
+                         where order.OrderDate.Value.Year == 1997
+                         group order by order.ShipCountry into g
+                         select new HighFreightOrders
+                         {
+                             ShipCountry = g.Key,
+                             AverageFreight = g.Average(x => x.Freight)
+                         }).OrderByDescending(x => x.AverageFreight).Take(3);
+            return query.ToList();
+        }
+
+        
+
+        public IEnumerable<HighFreightOrders> GetHighfreight_25()
+        {
+            // N_25
+            var query = (from order in Context.Orders
+                         group order by order.ShipCountry into g
+                         select new HighFreightOrders
+                         {
+                             ShipCountry = g.Key,
+                             AverageFreight = g.Average(x => x.Freight)
+                         }).OrderByDescending(x => x.AverageFreight).Take(3);
+            return query.ToList();
         }
 
         public IEnumerable<InventoryListModel> GetInventoryList()

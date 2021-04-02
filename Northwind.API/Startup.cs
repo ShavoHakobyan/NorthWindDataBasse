@@ -42,6 +42,7 @@ namespace Northwind.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindDataBasse", Version = "v1" });
             });
+            services.AddHttpContextAccessor();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
             services.AddScoped<IOrderOperations, OrderOperations>();
 
