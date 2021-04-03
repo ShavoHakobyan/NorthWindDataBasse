@@ -47,6 +47,13 @@ namespace Northwind.API.Controllers
            _customerOperations.Remove(id);
             return Ok();
         }
+        [HttpGet("{id}")]
+        public IActionResult GetCustomerID([FromRoute] string id)
+        {
+
+            var result = _customerOperations.GetCustomerID(id);
+            return Ok(result);
+        }
         [HttpGet("Total")]
         public IActionResult Totalcustomers()
         {

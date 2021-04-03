@@ -16,10 +16,10 @@ namespace Northwind.Core.Abstractions.Operations
         IEnumerable<CustomerswithOrders> GetCustomerswithnoorders();
         IEnumerable<TotalCustomers> GetTotalCustomers();
         IEnumerable<CustomerListbyRegion> GetCustomerlistbyregions();
-
         IEnumerable<HighValueCustomers> GetHighvaluecustomers();
         IEnumerable<HighValueCustomers> Highvaluecustomerstotalorders();
 
+        CustomerViewModel GetCustomerID(string customer);
         public void Add(CustomerRegistrPostModel model);
         Customer Edit(ChangeCustomerModel model);
         Task Remove(string id);

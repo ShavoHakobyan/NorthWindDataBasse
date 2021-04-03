@@ -84,6 +84,22 @@ namespace Northwind.BLL.Operations
             return _customerRepository.Customers.GetCustomer31();
         }
 
+        public CustomerViewModel GetCustomerID(string customer)
+        {
+            var customerId = _customerRepository.Customers.GetSingle(u => u.CustomerId == customer)
+               ?? throw new LogicExecption("Wrong customerId");
+            return new CustomerViewModel
+            {
+                Address = customerId.Address,
+                City = customerId.City,
+                CompanyName = customerId.CompanyName,
+                ContactName = customerId.ContactName,
+                ContactTitle = customerId.ContactTitle,
+                CustomerId = customerId.CustomerId,
+                Region = customerId.Region
+            };
+        }
+
         public IEnumerable<CustomerListbyRegion> GetCustomerlistbyregions()
         {
             _logger.LogInformation("CustomerOperation --- Number 24");
